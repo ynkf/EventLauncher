@@ -1,7 +1,11 @@
+using DaHo.Library.AspNetCore;
+using Eventlauncher.Web.Data;
+using Eventlauncher.Web.Data.Repositories;
+using Eventlauncher.Web.Data.Repositories.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +30,11 @@ namespace Eventlauncher.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddDbContext<EventContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IComputerRepository, ComputerRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -67,6 +76,8 @@ namespace Eventlauncher.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+
+            app.MigrateDatabase<EventContext>();
         }
     }
 }
