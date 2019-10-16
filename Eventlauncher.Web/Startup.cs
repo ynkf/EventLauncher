@@ -2,6 +2,8 @@ using DaHo.Library.AspNetCore;
 using Eventlauncher.Web.Data;
 using Eventlauncher.Web.Data.Repositories;
 using Eventlauncher.Web.Data.Repositories.Abstractions;
+using Eventlauncher.Web.Services;
+using Eventlauncher.Web.Services.Abstractions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
@@ -35,6 +37,11 @@ namespace Eventlauncher.Web
 
             services.AddScoped<IComputerRepository, ComputerRepository>();
             services.AddScoped<IRoomRepository, RoomRepository>();
+
+            services.AddTransient<ICalendarService, MockCalendarService>();
+            services.AddTransient<IComputerService, WolComputerService>();
+
+            services.AddHostedService<AppointmentService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
