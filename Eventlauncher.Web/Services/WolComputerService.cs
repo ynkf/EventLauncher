@@ -1,7 +1,7 @@
-﻿using System;
+﻿using Eventlauncher.Web.Services.Abstractions;
+using System;
 using System.Net;
 using System.Threading.Tasks;
-using Eventlauncher.Web.Services.Abstractions;
 
 namespace Eventlauncher.Web.Services
 {

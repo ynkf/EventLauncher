@@ -10,11 +10,11 @@ namespace Eventlauncher.Web.Models.ApiModels
         [Required]
         public string IpAddress { get; set; }
 
-        public EntityModels.Computer ToEntityModel() => 
-            new EntityModels.Computer 
-            { 
-                Id = Id, 
-                IpAddress = IpAddress 
+        public EntityModels.Computer ToEntityModel() =>
+            new EntityModels.Computer
+            {
+                Id = Id,
+                IpAddress = IpAddress
             };
     }
 }

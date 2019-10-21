@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Eventlauncher.Web.Services.Abstractions;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Eventlauncher.Web.Services.Abstractions;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Eventlauncher.Web.Services
 {
@@ -16,7 +16,7 @@ namespace Eventlauncher.Web.Services
         private readonly IComputerService _computerService;
 
         public AppointmentService(
-            ILogger<AppointmentService> logger, 
+            ILogger<AppointmentService> logger,
             ICalendarService calendarService,
             IComputerService computerService)
         {
@@ -34,16 +34,29 @@ namespace Eventlauncher.Web.Services
                 _logger.LogInformation($"Worker running at: {DateTime.Now}");
 
                 var allAppointments = await _calendarService.GetAllAppointmentsForRooms();
+                _logger.LogInformation($"Found {allAppointments.Count} appointments");
+
                 var computersToAwake = allAppointments
-                    .Where(x => x.DateTime > DateTime.Now 
+                    .Where(x => x.DateTime > DateTime.Now
                                 && x.DateTime <= DateTime.Now.Add(delayTime))
-                    .Select(x => x.Room.Computer);
+                    .Select(x => x.Room.Computer)
+                    .Distinct();
+                _logger.LogInformation($"Found {computersToAwake.Count()} individual computers");
 
                 foreach (var computer in computersToAwake)
                 {
-                    await _computerService.AwakeComputer(computer.IpAddress);
+                    _logger.LogInformation($"Awakening computer with IP-address '{computer.IpAddress}'");
+                    try
+                    {
+                        await _computerService.AwakeComputer(computer.IpAddress);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError($"An error happened while awakening computer with IP-address '{computer.IpAddress}'{Environment.NewLine}{e}");
+                    }
                 }
 
+                _logger.LogInformation($"Worker sleeping until {DateTime.Now + delayTime}");
                 await Task.Delay(delayTime, stoppingToken);
             }
         }

@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Eventlauncher.Web.Models.SvcModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using Eventlauncher.Web.Models.SvcModels;
 
 namespace Eventlauncher.Web.Services.Abstractions
 {

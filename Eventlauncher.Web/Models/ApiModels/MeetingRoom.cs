@@ -15,7 +15,6 @@ namespace Eventlauncher.Web.Models.ApiModels
 
         public int ComputerId { get; set; }
 
-
         public EntityModels.MeetingRoom ToEntityModel() =>
              new EntityModels.MeetingRoom
              {

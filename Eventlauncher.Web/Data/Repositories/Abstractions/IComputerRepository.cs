@@ -5,6 +5,5 @@ namespace Eventlauncher.Web.Data.Repositories.Abstractions
 {
     public interface IComputerRepository : IGenericRepository<Computer>
     {
-
     }
 }

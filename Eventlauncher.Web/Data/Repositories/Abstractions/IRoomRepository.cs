@@ -5,6 +5,5 @@ namespace Eventlauncher.Web.Data.Repositories.Abstractions
 {
     public interface IRoomRepository : IGenericRepository<MeetingRoom>
     {
-
     }
 }
