@@ -307,3 +307,6 @@ yarn-error.log
 
 # User specific bazel settings
 .bazelrc.user
+
+#dist
+Eventlauncher.Web/ClientApp/dist-server
