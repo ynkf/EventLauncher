@@ -1,16 +1,20 @@
 <button class="btn btn-primary">Login to microsoft</button>
 
-<div class="container">
-  <div class="row">
-    <div class="col">Meeting-Raum</div>
-    <div class="col">IP-Adresse</div>
-    <div class="col">Email</div>
-    <div class="col"></div>
-  </div>
-  <div class="row" *ngFor="let m of mockdata">
-    <div class="col">{{m.name}}</div>
-    <div class="col">{{m.ip}}</div>
-    <div class="col">{{m.email}}</div>
-    <div class="col">TODO actions</div>
-  </div>
-</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Meeting-Raum</th>
+      <th scope="col">IP-Adress</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let m of mockdata">
+      <td>{{m.name}}</td>
+      <td>{{m.ip}}</td>
+      <td>@{{m.email}}</td>
+      <td>TODO actions</td>
+    </tr>
+  </tbody>
+</table>
