@@ -11,10 +11,15 @@ export class HomeComponent implements OnInit {
   mockdata: MeetingRoom[];
 
   ngOnInit(): void {
-    let mr = new MeetingRoom();
-    mr.email = 'eventlauncher@gmail.com';
-    mr.name = 'EventlauncherRoom';
-    mr.ip = '192.164.08.56';
-    this.mockdata = [mr];
+    const mr1 = new MeetingRoom();
+    mr1.email = 'eventlauncher@gmail.com';
+    mr1.name = 'EventlauncherRoom';
+    mr1.ip = '192.164.08.56';
+
+    const mr2 = new MeetingRoom();
+    mr2.email = 'eventlauncher2@gmail.com';
+    mr2.name = 'EventlauncherRoom2';
+    mr2.ip = '192.164.08.69';
+    this.mockdata = [mr1, mr2];
   }
 }
