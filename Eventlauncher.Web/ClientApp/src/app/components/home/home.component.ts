@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { MeetingRoom } from '../models/MeetingRoom.model';
+import { MeetingRoom } from '../../models/MeetingRoom.model';
 
 @Component({
     selector: 'app-home',
