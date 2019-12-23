@@ -1,0 +1,18 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Meeting-Raum</th>
+      <th scope="col">IP-Adresse</th>
+      <th scope="col">Email</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let d of data">
+      <td>{{d?.roomDesignation}}</td>
+      <td>{{d?.computer?.ipAdress}}</td>
+      <td>{{d?.roomMailAdress}}</td>
+      <td>TODO actions</td>
+    </tr>
+  </tbody>
+</table>
