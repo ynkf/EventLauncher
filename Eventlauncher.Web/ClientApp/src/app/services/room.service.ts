@@ -1,3 +1,4 @@
+import { Room } from './../models/room.model';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -9,8 +10,8 @@ export class RoomService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getRooms(): Observable<any> {
-    return this.httpClient.get(`${this.baseApiUrl()}/list`);
+  getRooms(): Observable<Room[]> {
+    return this.httpClient.get<Room[]>(`${this.baseApiUrl()}/list`);
   }
 
   private baseApiUrl() {

@@ -8,11 +8,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let d of data">
-      <td>{{d?.roomDesignation}}</td>
-      <td>{{d?.computer?.ipAdress}}</td>
-      <td>{{d?.roomMailAdress}}</td>
-      <td>TODO actions</td>
+    <tr *ngFor="let room of rooms">
+      <td>{{room?.roomDesignation}}</td>
+      <td>{{room?.computer?.ipAdress}}</td>
+      <td>{{room?.roomMailAdress}}</td>
+      <td>
+        <button class="btn btn-primary btn-sm table-btn" >
+          <i class="material-icons md-18">delete</i>
+        </button>
+        <button class="btn btn-primary btn-sm table-btn" >
+          <i class="material-icons md-18">edit</i>
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

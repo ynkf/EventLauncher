@@ -1,3 +1,5 @@
+import { ComputerService } from './services/computer.service';
+import { RoomService } from './services/room.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,7 +26,10 @@ import { DataTableComponent } from './components/data-table/data-table.component
             { path: '', component: HomeComponent, pathMatch: 'full' }
         ])
     ],
-    providers: [],
+    providers: [
+      RoomService,
+      ComputerService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
