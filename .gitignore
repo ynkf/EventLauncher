@@ -25,7 +25,9 @@ obj/
 Obj/
 
 # Visual Studio 2015 cache/options directory
+# Visual Studio Code
 .vs/
+.vscode/
 
 # MSTest test Results
 [Tt]est[Rr]esult*/
@@ -310,3 +312,6 @@ yarn-error.log
 
 #dist
 Eventlauncher.Web/ClientApp/dist-server
+
+#Frontend
+Eventlauncher.Web/ClientApp/package-lock.json
