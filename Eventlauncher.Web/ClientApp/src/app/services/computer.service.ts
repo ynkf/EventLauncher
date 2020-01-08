@@ -14,6 +14,10 @@ export class ComputerService {
     return this.httpClient.get<Computer[]>(`${this.baseApiUrl()}/list`);
   }
 
+  createComputer(payload: Computer): Observable<Computer> {
+    return this.httpClient.post<Computer>(`${this.baseApiUrl()}/create`, payload);
+  }
+
   private baseApiUrl(): string {
     return 'api/computer';
   }

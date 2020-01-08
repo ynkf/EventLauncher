@@ -9,16 +9,36 @@
   </thead>
   <tbody>
     <tr *ngFor="let room of rooms">
-      <td>{{room?.roomDesignation}}</td>
-      <td>{{room?.computer?.ipAddress}}</td>
-      <td>{{room?.roomMailAddress}}</td>
+      <td >
+        <input *ngIf="room.isEdit; else ShowDesignation" type="text" [(ngModel)]="room && room.roomDesignation">
+        <ng-template #ShowDesignation>{{room?.roomDesignation}}</ng-template>
+      </td>
       <td>
-        <button class="btn btn-primary btn-sm table-btn" >
-          <i class="material-icons md-18">delete</i>
+        <input *ngIf="room.isEdit; else ShowComputerIpAddress" type="number" [(ngModel)]="room && room.computer && room.computer.ipAddress">
+        <ng-template #ShowComputerIpAddress>{{room?.computer?.ipAddress}}</ng-template>
+      </td>
+      <td>
+        <input *ngIf="room.isEdit; else ShowEmail" type="email" [(ngModel)]="room && room.roomMailAddress">
+        <ng-template #ShowEmail>{{room?.roomMailAddress}}</ng-template>
+      </td>
+      <td>
+        <button *ngIf="room.isEdit; else ShowEdit" class="btn btn-primary btn-sm table-btn" [disabled]="!isValidRoom(room)" (click)="save(room)">
+          <i class="material-icons md-18">save</i>
         </button>
-        <button class="btn btn-primary btn-sm table-btn" >
-          <i class="material-icons md-18">edit</i>
+        <ng-template #ShowEdit>
+          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()">
+            <i class="material-icons md-18">edit</i>
+          </button>
+        </ng-template>
+
+        <button *ngIf="room.isEdit; else ShowDelete" class="btn btn-primary btn-sm table-btn" (click)="cancel(room)">
+          <i class="material-icons md-18">cancel</i>
         </button>
+        <ng-template #ShowDelete>
+          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()">
+            <i class="material-icons md-18">delete</i>
+          </button>
+        </ng-template>
       </td>
     </tr>
   </tbody>

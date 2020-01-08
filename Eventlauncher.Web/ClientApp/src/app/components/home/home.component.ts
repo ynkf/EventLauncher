@@ -12,31 +12,65 @@ import { Computer } from 'src/app/models/computer.model';
 export class HomeComponent implements OnInit {
   rooms: Room[];
 
+  isInEdit = false;
+
   constructor(
     private computerService: ComputerService,
-    private roomService: RoomService,
+    private roomService: RoomService
   ) {}
 
-  ngOnInit(): void {
+  getData(): void {
     this.roomService
-      .getRooms()
+    .getRooms()
+    .pipe(catchError(err => {
+      console.log('TODO: ErrorHandling: ' + err);
+      return [] as Room[][];
+    }))
+    .subscribe(rooms => {
+      this.rooms = rooms;
+      this.computerService
+        .getComputers()
+        .pipe(catchError(err => {
+          console.log('TODO: ErrorHandling: ' + err);
+          return [] as Computer[][];
+        }))
+        .subscribe(computers =>
+          this.rooms = this.rooms.map(r => {
+            r.computer = computers.find(c => r.computerId === c.id);
+            return r;
+        }));
+    });
+  }
+
+  addData(): void {
+    this.rooms.push(new Room(true));
+  }
+
+  createData($event: Room) {
+    this.computerService
+      .createComputer($event.computer)
       .pipe(catchError(err => {
         console.log('TODO: ErrorHandling: ' + err);
-        return [] as Room[][];
+        return [] as Computer[];
       }))
-      .subscribe(rooms => {        
-        this.rooms = rooms;
-        this.computerService
-          .getComputers()
+      .subscribe(c => {
+        $event.computerId = c.id;
+        this.roomService
+          .createRoom($event)
           .pipe(catchError(err => {
             console.log('TODO: ErrorHandling: ' + err);
-            return [] as Computer[][];
-          }))
-          .subscribe(computers =>
-            this.rooms = this.rooms.map(r => {
-              r.computer = computers.find(c => r.computerId === c.id);              
-              return r;
+            return [] as Room[];
           }));
       });
+
+    this.getData();
+  }
+
+  isAnyDataInEdit($event: boolean): void {
+    this.isInEdit = $event;
+  }
+
+  ngOnInit(): void {
+    this.getData();
   }
 }
