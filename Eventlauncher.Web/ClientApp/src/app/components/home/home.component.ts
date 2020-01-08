@@ -66,6 +66,24 @@ export class HomeComponent implements OnInit {
     this.getData();
   }
 
+  updateData($event: Room): void {
+    this.computerService
+      .updateComputer($event.computer)
+      .pipe(catchError(err => {
+        console.log('TODO: ErrorHandling: ' + err);
+        return [];
+      }));
+
+    this.roomService
+      .updateRoom($event)
+      .pipe(catchError(err => {
+        console.log('TODO: ErrorHandling: ' + err);
+        return [];
+      }));
+
+    this.getData();
+  }
+
   isAnyDataInEdit($event: boolean): void {
     this.isInEdit = $event;
   }

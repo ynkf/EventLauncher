@@ -18,6 +18,10 @@ export class ComputerService {
     return this.httpClient.post<Computer>(`${this.baseApiUrl()}/create`, payload);
   }
 
+  updateComputer(payload: Computer): Observable<any> {
+    return this.httpClient.put(`${this.baseApiUrl()}/${payload.id}`, payload);
+  }
+
   private baseApiUrl(): string {
     return 'api/computer';
   }

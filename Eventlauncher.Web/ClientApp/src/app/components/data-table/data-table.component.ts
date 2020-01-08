@@ -15,6 +15,8 @@ export class DataTableComponent {
   isAnyDataInEdit = new EventEmitter<boolean>();
   @Output()
   createEvent = new EventEmitter<Room>();
+  @Output()
+  updateEvent = new EventEmitter<Room>();
 
   isAnyInEdit(): boolean {
     if (this.rooms) {
@@ -31,13 +33,33 @@ export class DataTableComponent {
       && this.isNilOrEmpty(room.roomMailAddress));
   }
 
+  edit(room: Room): void {
+    this.rooms.find(r => r.id === room.id).isEdit = true;
+  }
+
   cancel(room: Room): void {
-    this.rooms = this.rooms.filter(r => r.id !== room.id);
+    if (isNil(room.id)) {
+      this.rooms = this.rooms.filter(r => r.id !== room.id);
+    } else {
+      this.rooms.find(r => r.id === room.id).isEdit = false;
+    }
+
     this.isAnyInEdit();
   }
 
-  create(room: Room): void {
+  createOrUpdate(room: Room): void {
+    isNil(room.id)
+      ? this.create(room)
+      : this.update(room);
+  }
+
+  private create(room: Room): void {
     this.createEvent.emit(room);
+    this.isAnyInEdit();
+  }
+
+  private update(room: Room): void {
+    this.updateEvent.emit(room);
     this.isAnyInEdit();
   }
 

@@ -14,7 +14,7 @@
         <ng-template #ShowDesignation>{{room?.roomDesignation}}</ng-template>
       </td>
       <td>
-        <input *ngIf="room.isEdit; else ShowComputerIpAddress" type="number" [(ngModel)]="room && room.computer && room.computer.ipAddress">
+        <input *ngIf="room.isEdit; else ShowComputerIpAddress" type="text" [(ngModel)]="room && room.computer && room.computer.ipAddress">
         <ng-template #ShowComputerIpAddress>{{room?.computer?.ipAddress}}</ng-template>
       </td>
       <td>
@@ -22,11 +22,11 @@
         <ng-template #ShowEmail>{{room?.roomMailAddress}}</ng-template>
       </td>
       <td>
-        <button *ngIf="room.isEdit; else ShowEdit" class="btn btn-primary btn-sm table-btn" [disabled]="!isValidRoom(room)" (click)="save(room)">
+        <button *ngIf="room.isEdit; else ShowEdit" class="btn btn-primary btn-sm table-btn" [disabled]="!isValidRoom(room)" (click)="createOrUpdate(room)">
           <i class="material-icons md-18">save</i>
         </button>
         <ng-template #ShowEdit>
-          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()">
+          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()" (click)="edit(room)">
             <i class="material-icons md-18">edit</i>
           </button>
         </ng-template>
