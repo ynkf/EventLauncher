@@ -60,10 +60,9 @@ export class HomeComponent implements OnInit {
           .pipe(catchError(err => {
             console.log('TODO: ErrorHandling: ' + err);
             return [] as Room[];
-          }));
+          }))
+          .subscribe(() => this.getData());
       });
-
-    this.getData();
   }
 
   updateData($event: Room): void {
@@ -72,20 +71,24 @@ export class HomeComponent implements OnInit {
       .pipe(catchError(err => {
         console.log('TODO: ErrorHandling: ' + err);
         return [];
-      }));
+      }))
+      .subscribe();
 
     this.roomService
       .updateRoom($event)
       .pipe(catchError(err => {
         console.log('TODO: ErrorHandling: ' + err);
         return [];
-      }));
+      }))
+      .subscribe();
 
     this.getData();
   }
 
   isAnyDataInEdit($event: boolean): void {
-    this.isInEdit = $event;
+    setTimeout(() => {
+      this.isInEdit = $event;
+    });
   }
 
   ngOnInit(): void {
