@@ -17,6 +17,8 @@ export class DataTableComponent {
   createEvent = new EventEmitter<Room>();
   @Output()
   updateEvent = new EventEmitter<Room>();
+  @Output()
+  deleteEvent = new EventEmitter<Room>();
 
   isAnyInEdit(): boolean {
     if (this.rooms) {
@@ -51,6 +53,10 @@ export class DataTableComponent {
     isNil(room.id)
       ? this.create(room)
       : this.update(room);
+  }
+
+  delete(room: Room): void {
+    this.deleteEvent.emit(room);
   }
 
   private create(room: Room): void {

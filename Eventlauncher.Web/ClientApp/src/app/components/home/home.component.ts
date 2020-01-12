@@ -83,6 +83,16 @@ export class HomeComponent implements OnInit {
       });
   }
 
+  deleteData($event: Room): void {
+    this.computerService
+      .deleteComputer($event.computer.id)
+      .pipe(catchError(err => {
+        console.log('TODO: ErrorHandling: ' + err);
+        return [];
+      }))
+      .subscribe(() => this.getData());
+  }
+
   isAnyDataInEdit($event: boolean): void {
     setTimeout(() => {
       this.isInEdit = $event;

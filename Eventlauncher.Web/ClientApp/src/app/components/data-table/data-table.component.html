@@ -35,7 +35,7 @@
           <i class="material-icons md-18">cancel</i>
         </button>
         <ng-template #ShowDelete>
-          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()">
+          <button class="btn btn-primary btn-sm table-btn" [disabled]="isAnyInEdit()" (click)="delete(room)">
             <i class="material-icons md-18">delete</i>
           </button>
         </ng-template>

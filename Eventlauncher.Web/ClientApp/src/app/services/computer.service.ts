@@ -22,6 +22,10 @@ export class ComputerService {
     return this.httpClient.put(`${this.baseApiUrl()}/edit/${payload.id}`, payload);
   }
 
+  deleteComputer(id: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseApiUrl()}/${id}`);
+  }
+
   private baseApiUrl(): string {
     return 'api/computer';
   }
