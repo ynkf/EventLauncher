@@ -13,11 +13,16 @@ export class HomeComponent implements OnInit {
   rooms: Room[];
 
   isInEdit = false;
+  isLoggedIn = false;
 
   constructor(
     private computerService: ComputerService,
     private roomService: RoomService
   ) {}
+
+  login(): void {
+    this.isLoggedIn = true;
+  }
 
   getData(): void {
     this.roomService
