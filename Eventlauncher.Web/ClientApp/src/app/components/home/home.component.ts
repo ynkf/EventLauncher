@@ -72,17 +72,15 @@ export class HomeComponent implements OnInit {
         console.log('TODO: ErrorHandling: ' + err);
         return [];
       }))
-      .subscribe();
-
-    this.roomService
-      .updateRoom($event)
-      .pipe(catchError(err => {
-        console.log('TODO: ErrorHandling: ' + err);
-        return [];
-      }))
-      .subscribe();
-
-    this.getData();
+      .subscribe(() => {
+        this.roomService
+        .updateRoom($event)
+        .pipe(catchError(err => {
+          console.log('TODO: ErrorHandling: ' + err);
+          return [];
+        }))
+        .subscribe(() => this.getData());
+      });
   }
 
   isAnyDataInEdit($event: boolean): void {
