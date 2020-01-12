@@ -4,7 +4,6 @@ namespace Eventlauncher.Web.Models.ApiModels
 {
     public class MeetingRoom
     {
-        [Required]
         public int Id { get; set; }
 
         [Required]

@@ -29,10 +29,8 @@ namespace Eventlauncher.Web.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest();
-
-            await _computerRepository.CreateAsync(computer.ToEntityModel());
-
-            return Ok();
+            
+            return Ok(await _computerRepository.CreateAsyncReturnId(computer.ToEntityModel()));
         }
 
         [Route("edit/{id:int}")]
