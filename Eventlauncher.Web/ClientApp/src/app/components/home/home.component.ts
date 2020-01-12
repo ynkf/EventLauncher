@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.roomService
     .getRooms()
     .pipe(catchError(err => {
-      console.log('TODO: ErrorHandling: ' + err);
+      console.error(err);
       return [] as Room[][];
     }))
     .subscribe(rooms => {
@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
       this.computerService
         .getComputers()
         .pipe(catchError(err => {
-          console.log('TODO: ErrorHandling: ' + err);
+          console.error(err);
           return [] as Computer[][];
         }))
         .subscribe(computers =>
@@ -50,7 +50,7 @@ export class HomeComponent implements OnInit {
     this.computerService
       .createComputer($event.computer)
       .pipe(catchError(err => {
-        console.log('TODO: ErrorHandling: ' + err);
+        console.error(err);
         return [] as Computer[];
       }))
       .subscribe(c => {
@@ -58,7 +58,7 @@ export class HomeComponent implements OnInit {
         this.roomService
           .createRoom($event)
           .pipe(catchError(err => {
-            console.log('TODO: ErrorHandling: ' + err);
+            console.error(err);
             return [] as Room[];
           }))
           .subscribe(() => this.getData());
@@ -69,14 +69,14 @@ export class HomeComponent implements OnInit {
     this.computerService
       .updateComputer($event.computer)
       .pipe(catchError(err => {
-        console.log('TODO: ErrorHandling: ' + err);
+        console.error(err);
         return [];
       }))
       .subscribe(() => {
         this.roomService
         .updateRoom($event)
         .pipe(catchError(err => {
-          console.log('TODO: ErrorHandling: ' + err);
+          console.error(err);
           return [];
         }))
         .subscribe(() => this.getData());
@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
     this.computerService
       .deleteComputer($event.computer.id)
       .pipe(catchError(err => {
-        console.log('TODO: ErrorHandling: ' + err);
+        console.error(err);
         return [];
       }))
       .subscribe(() => this.getData());
