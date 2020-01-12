@@ -19,7 +19,7 @@ export class RoomService {
   }
 
   updateRoom(payload: Room): Observable<any> {
-    return this.httpClient.put(`${this.baseApiUrl()}/${payload.id}`, payload);
+    return this.httpClient.put(`${this.baseApiUrl()}/edit/${payload.id}`, payload);
   }
 
   private baseApiUrl() {
