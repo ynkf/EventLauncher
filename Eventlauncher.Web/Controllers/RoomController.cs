@@ -36,7 +36,7 @@ namespace Eventlauncher.Web.Controllers
         }
 
         [Route("edit/{id:int}")]
-        [HttpPost]
+        [HttpPut]
         public async Task<IActionResult> Edit(int id, MeetingRoom room)
         {
             if (id != room.Id)
