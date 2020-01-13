@@ -52,7 +52,7 @@ namespace Eventlauncher.Web.Services
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError($"An error happened while awakening computer with IP-address '{computer.IpAddress}'{Environment.NewLine}{e}");
+                        _logger.LogWarning($"An error happened while awakening computer with IP-address '{computer.IpAddress}'{Environment.NewLine}{e}");
                     }
                 }
 
